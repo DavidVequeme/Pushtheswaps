@@ -6,7 +6,7 @@
 /*   By: dvidal <dvidal@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/12 10:23:53 by dvidal            #+#    #+#             */
-/*   Updated: 2025/08/27 16:32:18 by dvidal           ###   ########.fr       */
+/*   Updated: 2025/09/01 17:57:56 by dvidal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,16 +25,25 @@
 #  define INT_MIN -2147483648
 # endif
 
+typedef struct s_stack
+{
+    t_list  *lst;
+    int     size;
+}   t_stack;
+
 typedef struct s_var
 {
-    t_list *lst_a;
-    t_list *lst_b;
-    t_list *head;
+    t_stack a;
+    t_stack b;
     int *arr_aux;
     int i;
+    int chunck_size;
     int lstsize;
 
 }   t_var;
+
+
+
 int ft_isalpha(int c);
 int ft_issign(int c);
 int ft_leng(char *s);
@@ -55,5 +64,7 @@ void swap_b(t_var *program);
 void swap_a(t_var *program);
 void swap_both(t_var *program);
 void    dbg_print_stack(t_var program);
+void moves(t_var *program);
+void chunck_set(t_var *program);
 
 # endif

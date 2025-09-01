@@ -6,7 +6,7 @@
 /*   By: dvidal <dvidal@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/12 10:44:18 by dvidal            #+#    #+#             */
-/*   Updated: 2025/08/27 12:26:50 by dvidal           ###   ########.fr       */
+/*   Updated: 2025/09/01 18:53:41 by dvidal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,14 +75,14 @@ int isvalid_number(t_var *program, char *s, long *n)
 
     i = 0;
     *n = ft_atol(s);
-    temp = program->lst_a;
+    temp = program->a.lst;
     if (*n > INT_MAX || *n < INT_MIN)
         return (0);
     while(temp != NULL)
     {
-        if (temp ->n == *n)
+        if (temp->n == *n)
             return(0);
-        temp  = temp ->next;
+        temp = temp->next;
     }
     return(1);
 }
@@ -115,7 +115,7 @@ int populatelist(t_var *program, char *s)
             return(ft_printf("Error on input (%s)\n", array[i]),0);
         if (!isvalid_number(program, array[i], &num))  
             return(ft_printf("Error on number (%s)\n", array[i]),0);
-        lst_add_back(&(program->lst_a), num);
+        lst_add_back(&(program->a.lst), num);
         i++;
     }
     freesplit(array);

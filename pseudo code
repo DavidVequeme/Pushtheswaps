@@ -1,0 +1,43 @@
+1RA PARTE
+/*
+
+    Divide stacks by chuncks and size
+    empurra todos entre x e y
+
+    
+    1 - 2 chunk 1 
+                        BIG CHUNkUS 1
+    3 - 4 chunk 2 
+
+    5 - 6 chunk 3
+                        BIG CHUNkUS 2
+    7 - 8 chunk 4
+
+    chunk size;
+    while (stack_a.size != 3)
+    {
+
+        if(current is in lower chunk)
+        {
+            push b
+        }
+
+        if(current is in upper chunk)
+        {
+            push b 
+            rotate b
+        }
+        if (stack b doesnt contain any thing from these chunks)
+        {
+            increase lower chunk
+            increase upper chunk
+        }
+       rotate
+    }
+
+
+*/
+
+2NDA PARTE
+
+Pushar de volta organiz

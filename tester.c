@@ -14,8 +14,8 @@ void	dbg_print_stack(t_var program)
 	t_list	*a;
 	t_list	*b;
 
-	a = program.lst_a;
-	b = program.lst_b;
+	a = program.a.lst;
+	b = program.b.lst;
 	ft_printf("\n\nA	|	B\n");
 	ft_printf("____________________________\n");
 	while (a != NULL || b != NULL)

@@ -6,7 +6,7 @@
 /*   By: dvidal <dvidal@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/12 10:33:30 by dvidal            #+#    #+#             */
-/*   Updated: 2025/08/27 16:30:17 by dvidal           ###   ########.fr       */
+/*   Updated: 2025/09/01 19:15:21 by dvidal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,17 +49,20 @@ void indexlist(t_var *program)
     int index;
     t_list *ref;
 
-    ref = program->lst_a;
+    ref = program->a.lst;
     index = 0;
     while(index < program->lstsize)
     {
+        ft_printf("Current index %d \n",  index);
         if (ref && ref->n == program->arr_aux[index])
         {
             ref->n = index;
             index = 0;
             ref = ref->next;
+            ft_printf("\n");
         }
-        index++;
+        else
+            index++;
     }
 }
 
@@ -68,21 +71,21 @@ int init(t_var *program, int ac, char **av)
     int i;
 
     i = 1;
-    program->lst_a = NULL;
-    program->lst_b = NULL;
+    program->a.lst = NULL;
+    program->b.lst = NULL;
+    program->b.size = 0;
     ft_printf("ac: %d\n", ac - 1);
     while(i < ac)
     {
         populatelist(program, av[i]);
-        if (i == 1)
-            program->head = program->lst_a;
         i++;  
     }
-    program->lstsize = lst_size(program->lst_a);
+    program->lstsize = lst_size(program->a.lst);
+    program->a.size = program->lstsize; 
     program->arr_aux = malloc(sizeof (int) * (program->lstsize + 1));
+    chunck_set(program);
     if (program->arr_aux == NULL)
         return(0);
-    ft_printf("aux arr:\n");
     return(1);
 }
 void sortlst(t_var *program)
@@ -90,7 +93,7 @@ void sortlst(t_var *program)
     int i;
     t_list *ref;
 
-    ref = program->lst_a;
+    ref = program->a.lst;
     i = 0;
     while (ref != NULL)
     {
@@ -103,35 +106,26 @@ void sortlst(t_var *program)
 
 int main(int ac, char **av)
 {
-    t_var *program;
-    t_list *lstcpy;
+    t_var program;
+
     int i;
     i = 0;
-    program = NULL;
-    program = malloc(sizeof(t_var));
-    init(program, ac, av);
-    lstcpy = program->lst_a;
-    sortlst(program);
-    while(i < program->lstsize)
+    init(&program, ac, av);
+    sortlst(&program);
+    ft_printf("arr aux :");
+    while (i < program.lstsize)
     {
-        ft_printf("[%d]", program->arr_aux[i]);
+        ft_printf("[%d]", program.arr_aux[i]);
         i++;
     }
-    indexlist(program);
-    program->lst_a = program->head;
-    ft_printf("\nlist: ");
-    while (program->lst_a != NULL)
-    {
-        ft_printf("[%d]", program->lst_a->n);
-        program->lst_a = program->lst_a->next;
-    }
-    program->lst_a = program->head;
-    push_b(program);
-    dbg_print_stack(*program);
-    push_b(program);
-    push_b(program);
-    dbg_print_stack(*program);
-    swap_both(program);
-    dbg_print_stack(*program);
     ft_printf("\n");
+    indexlist(&program);
+    dbg_print_stack(program);
+    moves(&program);
+    dbg_print_stack(program);
+    ft_printf("\n");
+    lst_clear(&program.a.lst);
+    lst_clear(&program.b.lst);
+    free(program.arr_aux);
+
 }

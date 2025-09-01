@@ -6,7 +6,7 @@
 #    By: dvidal <dvidal@student.42lisboa.com>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/18 13:27:55 by dvidal            #+#    #+#              #
-#    Updated: 2025/08/27 14:04:34 by dvidal           ###   ########.fr        #
+#    Updated: 2025/09/01 11:55:28 by dvidal           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ SRC := parcing.c push_swap.c split.c ft_slen.c ft_strlcpy.c moves.c tester.c
 
 OBJ := $(SRC:.c=.o)
 
-HEADER := pushswap.h
+HEADER := push_swap.h
 
 RM := rm -f
 
@@ -32,7 +32,7 @@ $(NAME): $(OBJ)
 	$(MAKE) -C ./printf
 	$(MAKE) -C ./libft
 	$(MAKE) -C ./lists
-	$(CC)   $(OBJ) -o $(NAME) $(LFLAGS)
+	$(CC) $(OBJ) -o $(NAME) $(LFLAGS) -I.
 
 clean:
 	$(RM) $(OBJ)
